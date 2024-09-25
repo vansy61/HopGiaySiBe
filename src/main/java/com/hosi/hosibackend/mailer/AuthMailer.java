@@ -18,7 +18,7 @@ public class AuthMailer {
 
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-        String subject = "Verify OTP";
+        String subject = "Xác thực Email";
         String content =
                 "<div style=\"background-color:#d5d9e2; padding: 15px 0 15px 0;\">\n" +
                 "<div style=\"background-color:#ffffff; padding: 45px 0 34px 0; border-radius: 24px; margin:40px auto; max-width: 600px;\">\n" +
@@ -55,6 +55,53 @@ public class AuthMailer {
                         "  </table>" +
                 "</div>" +
                 "</div>";
+
+        mimeMessageHelper.setTo(email);
+        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(content, true);
+
+        javaMailSender.send(mimeMessage);
+    }
+
+    public void sendOtpTwoFactor(String email, String otp) throws MessagingException {
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        String subject = "Mã Xác Thực";
+        String content =
+                "<div style=\"background-color:#d5d9e2; padding: 15px 0 15px 0;\">\n" +
+                        "<div style=\"background-color:#ffffff; padding: 45px 0 34px 0; border-radius: 24px; margin:40px auto; max-width: 600px;\">\n" +
+                        "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" height=\"auto\" style=\"border-collapse:collapse\">\n" +
+                        "    <tbody>\n" +
+                        "    <tr>\n" +
+                        "      <td align=\"center\" valign=\"center\" style=\"text-align:center; padding-bottom: 10px\">\n" +
+                        "        <div style=\"text-align:center; margin:0 15px 34px 15px\">\n" +
+                        "          <div style=\"margin-bottom: 10px\">\n" +
+                        "              <img alt=\"Logo\" src=\"https://hopgiaysi.com/stores/4/medium/hopgiaysi-v3.png\" style=\"height: 35px\">\n" +
+                        "          </div>\n" +
+                        "          <div style=\"margin-bottom: 15px\">\n" +
+                        "            <img alt=\"Logo\" src=\"https://i.ibb.co/MMsmcTr/icon-positive-vote-1.png\">\n" +
+                        "          </div>\n" +
+                        "          <div style=\"font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;\">\n" +
+                        "            <p style=\"margin-bottom:9px; color:#181C32; font-size: 18px; font-weight:700\">Xin chào, mã xác thực đăng nhập của bạn là</p>\n" +
+                        "            <p style=\"margin-bottom:2px; color:#181C32; font-size: 40px;\">"+ otp +"</p>\n" +
+                        "          </div>\n" +
+                        "        </div>\n" +
+                        "      </td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "      <td align=\"center\" valign=\"center\" style=\"font-size: 13px; padding:0 15px; text-align:center; font-weight: 500; color: #A1A5B7;font-family:Arial,Helvetica,sans-serif\">\n" +
+                        "        <p>\n" +
+                        "          © Copyright HopGiaySi.\n" +
+                        "        </p>\n" +
+                        "      </td>\n" +
+                        "    </tr>\n" +
+                        "    </tbody>\n" +
+                        "  </table>" +
+                        "</div>" +
+                        "</div>";
 
         mimeMessageHelper.setTo(email);
         mimeMessageHelper.setSubject(subject);

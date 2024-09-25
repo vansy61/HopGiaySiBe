@@ -1,5 +1,6 @@
 package com.hosi.hosibackend.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import java.util.Collection;
 @Builder
 public class CustomUserDetails implements UserDetails {
     private Long id;
+    @JsonIgnore
     private String password;
     private String fullName;
     private String email;

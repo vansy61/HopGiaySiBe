@@ -7,23 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
-@Table(name = "user_sessions")
-@Builder
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSession {
+public class UserOtp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String token;
-    private String userAgent;
-    private String ipAddress;
-    private Boolean isMobile;
+    private String otp;
     @ColumnDefault("0")
-    private Boolean isRevoked;
+    private Boolean isUsed;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private LocalDateTime expiredAt;
+
 }

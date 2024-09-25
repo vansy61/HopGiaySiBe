@@ -1,4 +1,4 @@
-package com.hosi.hosibackend.entity.dto;
+package com.hosi.hosibackend.entity.response;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,4 +14,5 @@ public class ResponseUser {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
     private String accessToken;
+    private boolean needOtp = false;
 }

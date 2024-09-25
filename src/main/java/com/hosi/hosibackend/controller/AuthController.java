@@ -2,7 +2,7 @@ package com.hosi.hosibackend.controller;
 
 import com.hosi.hosibackend.entity.dto.FormLogin;
 import com.hosi.hosibackend.entity.dto.FormSignup;
-import com.hosi.hosibackend.entity.dto.ResponseUser;
+import com.hosi.hosibackend.entity.response.ResponseUser;
 import com.hosi.hosibackend.service.IAuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -37,5 +37,16 @@ public class AuthController {
         String token = request.get("token");
         authService.verifyEmail(token);
         return new ResponseEntity<>("{}", HttpStatus.OK);
+    }
+
+    @PostMapping("/verify-two-factor")
+    public ResponseEntity<?> verifyTwoFactor(
+            @RequestBody Map<String, String> form,
+            HttpServletRequest request
+    ) {
+        String otp = form.get("otp");
+        String email = form.get("email");
+        ResponseUser responseUser = authService.verifyTwoFactor(email, otp, request);
+        return new ResponseEntity<>(responseUser, HttpStatus.OK);
     }
 }

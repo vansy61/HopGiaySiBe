@@ -28,6 +28,9 @@ public class User {
     @ColumnDefault("0")
     private boolean isActive = false;
 
+    @ColumnDefault("0")
+    private boolean enableTwoFactor = false;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
